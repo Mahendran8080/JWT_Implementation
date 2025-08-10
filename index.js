@@ -13,7 +13,7 @@ app.use(express.json());
 
 //here dont have to use middleware since it is common for all of them
 app.use('/user',userRoute);
-app.use('/user',userRoute);
+
 
 app.get('/',(req,res)=>{
     res.send("client started");

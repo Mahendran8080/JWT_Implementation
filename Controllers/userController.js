@@ -10,7 +10,7 @@ const logIn=async(req,res)=>{
 
     try
     {
-        const exists=await userModel.findOne({email});
+        const exists=await userModel.findOne({email}); //object
 
         if(exists)
         {
@@ -18,7 +18,7 @@ const logIn=async(req,res)=>{
             if(isMatch)
             {
                 const token=jwt.sign({id:exists._id,email:exists.email},process.env.JWT_SECRET,{expiresIn:process.env.JWT_EXPIRES_IN});
-                return res.json({success:true,message:"user logged in",token});
+                return res.json({success:true,message:"user logged in",token});//important
 
             }
             else
@@ -40,17 +40,20 @@ const logIn=async(req,res)=>{
 
 const signUp= async(req,res)=>{
 
-    const {name,email,password}=req.body;
+    const {name,email,password}=req.body;//payload
 
     try
     {
-        const exists=await userModel.findOne({email});
+        const exists=await userModel.findOne({email});//obj.name obj.email obj.password obj return
+        //const exists=await userModel.findOne(email); jaya@gmail.com string string
+
 
         if(exists)
         {
             return res.json({success:false,message:"User already exists"});
 
         }
+        
 
         // const salt=bcrypt.genSalt(5);
         const hashedPassword=await bcrypt.hash(password,5);
